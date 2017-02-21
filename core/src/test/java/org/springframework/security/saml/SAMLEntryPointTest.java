@@ -134,8 +134,8 @@ public class SAMLEntryPointTest {
         expect(request.getParameter(SAMLEntryPoint.DISCOVERY_RESPONSE_PARAMETER)).andReturn("false");
         SAMLTestHelper.setLocalContextParameters(request, "/samlApp", null);
         SAMLTestHelper.setPeerContextParameters(request, null, null);
-        expect(request.getAttribute(org.springframework.security.saml.SAMLConstants.LOCAL_CONTEXT_PATH)).andReturn("/samlApp");
-        response.sendRedirect("/samlApp/saml/discovery?returnIDParam=idp&entityID=http://localhost:8081/spring-security-saml2-webapp");
+        expect(request.getAttribute(org.springframework.security.saml.SAMLConstants.LOCAL_CONTEXT_PATH)).andReturn("http://localhost:8081/samlApp");
+        response.sendRedirect("http://localhost:8081/samlApp/saml/discovery?returnIDParam=idp&entityID=http%3A%2F%2Flocalhost%3A8081%2Fspring-security-saml2-webapp");
 
         replayMock();
         entryPoint.commence(request, response, null);
